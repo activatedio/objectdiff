@@ -1,0 +1,56 @@
+image: gradle:7.2.0-jdk11
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - mkdir -p $GRADLE_USER_HOME
+  - echo "tivityMavenUser=$TIVITY_MAVEN_USERNAME" >> $GRADLE_USER_HOME/gradle.properties
+  - echo "tivityMavenPassword=$TIVITY_MAVEN_PASSWORD" >> $GRADLE_USER_HOME/gradle.properties
+
+stages:
+  - verify
+  - publish
+  - release
+
+verify:
+  stage: verify
+  script: gradle --build-cache check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+
+publish:
+  stage: publish
+  script: gradle --build-cache publish
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+  except:
+    - master
+
+release:
+  stage: release
+  script: 
+    - export CI_PUSH_REPO=`echo "$CI_REPOSITORY_URL $OAUTH2_ACCESS_TOKEN" | sed 's/^.*\(@.*\)\s\(.*\)/https:\/\/oauth2:\2\1/g'`
+    - git config http.sslverify false
+    - git remote set-url --push origin "${CI_PUSH_REPO}"
+    - git config --global user.email "ci@tivityhealth.com"
+    - git config --global user.name "CI"
+    - git checkout master
+    - gradle release 
+    - git push -o ci.skip origin master
+    - git push -o ci.skip origin --tags
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+  only:
+    - master
+
