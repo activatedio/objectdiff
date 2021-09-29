@@ -2,6 +2,22 @@ plugins {
     id 'java-library'
 }
 
+configurations {
+    provided
+}
+
+sourceSets {
+    main { 
+      compileClasspath += configurations.provided 
+      runtimeClasspath += configurations.provided
+    }
+    test { 
+      compileClasspath += configurations.provided 
+      runtimeClasspath += configurations.provided
+    }
+}
+
+
 ext {
   mockitoVersion = '3.12.4'
 }
@@ -9,7 +25,7 @@ ext {
 
 dependencies {
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
+    provided group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
     api group: 'com.flipkart.zjsonpatch', name: 'zjsonpatch', version: '0.4.11'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
     testImplementation 'org.assertj:assertj-core:3.15.0'
