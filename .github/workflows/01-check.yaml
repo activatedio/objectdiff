@@ -2,7 +2,7 @@ name: Check
 
 on: 
   push:
-    ignore_branches:    
+    branches-ignore:    
       - 'master'
       - 'releases/**'
 
