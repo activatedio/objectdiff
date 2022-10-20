@@ -52,10 +52,7 @@ publishing {
 }
 
 release {
-//    afterReleaseBuild.dependsOn publishToSonatype
-//    git {
- //       pushToRemote = true
- //   }
+  afterReleaseBuild.dependsOn publish
 }
 
 
