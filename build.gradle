@@ -10,64 +10,54 @@ repositories {
     mavenCentral()
 }
 
+nexusPublishing {
+  repositories {
+    sonatype()
+  }
+}
+
+publishing {
+
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        from(components.java)
+          pom {
+            name = 'objectdiff'
+            description = 'Object Diff'
+            url = 'https://activate.io/projects/objectdiff'
+            licenses {
+              license {
+                name = 'The Apache License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+              }
+            }
+
+            developers {
+              developer {
+                id = 'btomasini'
+                name = 'Ben Tomasini'
+                email = 'btomasini@activated.io'
+              }
+            }
+            scm {
+              connection = 'scm:git:git://github.com/activatedio/objectdiff.git'
+              developerConnection = 'scm:git:git://github.com/activatedio/objectdiff.git'
+              url = 'https://github.com/activatedio/objectdiff'
+            }
+          }
+      }
+    }
+  }
+}
+
 subprojects {
 
   apply plugin: 'java-library'
 
   apply plugin: 'maven-publish'
 
-  apply plugin: 'io.github.gradle-nexus.publish-plugin'
-
   group = 'io.activated.objectdiff'
-
-  repositories {
-      mavenCentral()
-  }
-
-  nexusPublishing {
-    repositories {
-      sonatype()
-    }
-  }
-
-  publishing {
-
-    publishing {
-      publications {
-        mavenJava(MavenPublication) {
-          from(components.java)
-            pom {
-              name = 'objectdiff'
-              description = 'Object Diff'
-              url = 'https://activate.io/projects/objectdiff'
-              licenses {
-                license {
-                  name = 'The Apache License, Version 2.0'
-                  url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                }
-              }
-
-              developers {
-                developer {
-                  id = 'btomasini'
-                  name = 'Ben Tomasini'
-                  email = 'btomasini@activated.io'
-                }
-              }
-              scm {
-                connection = 'scm:git:git://github.com/activatedio/objectdiff.git'
-                developerConnection = 'scm:git:git://github.com/activatedio/objectdiff.git'
-                url = 'https://github.com/activatedio/objectdiff'
-              }
-            }
-        }
-      }
-    }
-
-    repositories {
-      mavenCentral()
-    }
-  }
 
   repositories {
       mavenCentral()
@@ -82,19 +72,18 @@ subprojects {
     }
   }
 
-
-
   java {
       sourceCompatibility = JavaVersion.toVersion("11")
       targetCompatibility = JavaVersion.toVersion("11")
   }
 
-  release {
-      afterReleaseBuild.dependsOn publishToSonatype
-      git {
-          pushToRemote = true
-      }
-  }
-
 }
+
+release {
+    afterReleaseBuild.dependsOn publishToSonatype
+    git {
+        pushToRemote = true
+    }
+}
+
 
