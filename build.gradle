@@ -58,7 +58,7 @@ signing {
 }
 
 release {
-  //afterReleaseBuild.dependsOn publishToSonatype
+  afterReleaseBuild.dependsOn publish
 }
 
 
