@@ -56,6 +56,7 @@ release {
 }
 
 
+
 subprojects {
 
   apply plugin: 'java-library'
@@ -80,10 +81,6 @@ subprojects {
   java {
       sourceCompatibility = JavaVersion.toVersion("11")
       targetCompatibility = JavaVersion.toVersion("11")
-  }
-
-  release {
-    afterReleaseBuild.dependsOn publishToSonatype
   }
 
 }
