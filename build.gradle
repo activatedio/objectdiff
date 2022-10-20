@@ -57,11 +57,6 @@ signing {
   sign publishing.publications.mavenJava
 }
 
-release {
-  afterReleaseBuild.dependsOn publish
-}
-
-
 subprojects {
 
   apply plugin: 'java-library'
@@ -88,6 +83,9 @@ subprojects {
       targetCompatibility = JavaVersion.toVersion("11")
   }
 
+  release {
+    afterReleaseBuild.dependsOn publish
+  }
 }
 
 
