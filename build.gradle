@@ -49,12 +49,15 @@ publishing {
       }
     }
   }
+
+  signing {
+    sign publishing.publications.mavenJava
+  }
 }
 
 release {
-  afterReleaseBuild.dependsOn publishToSonatype
+  //afterReleaseBuild.dependsOn publishToSonatype
 }
-
 
 
 subprojects {
