@@ -16,6 +16,8 @@ subprojects {
 
   apply plugin: 'maven-publish'
 
+  apply plugin: 'io.github.gradle-nexus.publish-plugin'
+
   group = 'io.activated.objectdiff'
 
   repositories {
@@ -90,7 +92,7 @@ subprojects {
   release {
       afterReleaseBuild.dependsOn publishToSonatype
       git {
-          pushToRemote = false
+          pushToRemote = true
       }
   }
 
