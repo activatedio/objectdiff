@@ -23,9 +23,9 @@ publishing {
       mavenJava(MavenPublication) {
         from(components.java)
           pom {
-            name = 'objectdiff'
+            groupId = 'io.activated.objectdiff'
             description = 'Object Diff'
-            url = 'https://activate.io/projects/objectdiff'
+            url = 'https://activated.io/projects/objectdiff'
             licenses {
               license {
                 name = 'The Apache License, Version 2.0'
@@ -50,6 +50,14 @@ publishing {
     }
   }
 }
+
+release {
+//    afterReleaseBuild.dependsOn publishToSonatype
+    git {
+        pushToRemote = true
+    }
+}
+
 
 subprojects {
 
@@ -77,13 +85,6 @@ subprojects {
       targetCompatibility = JavaVersion.toVersion("11")
   }
 
-}
-
-release {
-    afterReleaseBuild.dependsOn publishToSonatype
-    git {
-        pushToRemote = true
-    }
 }
 
 
