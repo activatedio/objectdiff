@@ -52,7 +52,7 @@ publishing {
 }
 
 release {
-  afterReleaseBuild.dependsOn publish
+  afterReleaseBuild.dependsOn io.github.gradle-nexus.publish-plugin.publishToSonatype
 }
 
 
