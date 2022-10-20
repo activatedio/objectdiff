@@ -85,6 +85,10 @@ subprojects {
       targetCompatibility = JavaVersion.toVersion("11")
   }
 
+  release {
+    afterReleaseBuild.dependsOn publishToSonatype
+  }
+
 }
 
 
