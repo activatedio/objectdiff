@@ -1,6 +1,10 @@
 name: Check
 
-on: [push]
+on: 
+  push:
+    ignore_branches:    
+      - 'master'
+      - 'releases/**'
 
 jobs:
   check:
