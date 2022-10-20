@@ -1,13 +1,12 @@
-buildscript {
-    repositories { 
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.researchgate.release' version '2.8.1'
+    id 'com.diffplug.spotless' version '6.11.0'
+}
+
+repositories { 
+    mavenCentral()
 }
 
 subprojects {
@@ -34,28 +33,24 @@ subprojects {
     }
 
     repositories {
-      maven {
-        def repoBase = "https://nexus.authkit.com/repository"
-        def releasesRepoUrl = "$repoBase/maven-releases"
-        def snapshotsRepoUrl = "$repoBase/maven-snapshots"
-        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-        credentials {
-          username "$authkitMavenUser"
-          password "$authkitMavenPassword"
-        }
-      }
+      mavenCentral()
     }
   }
 
   repositories {
-      maven {
-        url 'https://nexus.authkit.com/repository/maven-all/'
-        credentials {
-          username "$authkitMavenUser"
-          password "$authkitMavenPassword"
-        }
-      }
+      mavenCentral()
   }
+
+  spotless {
+    java {
+      target 'src/**/*.java'
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat()   // has its own section below
+    }
+  }
+
+
 
   java {
       sourceCompatibility = JavaVersion.toVersion("11")
