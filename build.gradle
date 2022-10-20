@@ -52,7 +52,7 @@ publishing {
 }
 
 release {
-  afterReleaseBuild.dependsOn project.tasks.publishToSonatype
+  afterReleaseBuild.dependsOn project.tasks.findByName('publishToSonatype')
 }
 
 
