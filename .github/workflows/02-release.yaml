@@ -15,12 +15,16 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
-      - name: Setup Login Credentials
+      - name: Setup Login Credentials and Config
         run: |
           mkdir ~/.gradle
           echo "sonatypeUsername=$SONATYPE_USERNAME" >> ~/.gradle/gradle.properties
           echo "sonatypePassword=$SONATYPE_PASSWORD" >> ~/.gradle/gradle.properties
+          echo "signing.keyId=8D1B668F" >> ~/.gradle/gradle.properties
+          echo "signing.password=$GPG_SIGNING_KEY_PASSPHRASE" >> ~/.gradle/gradle.properties
+          echo "signing.secretKeyRingFile=~/.gnupg/secring.gpg" >> ~/.gradle/gradle.properties
         env:
+          GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
       - uses: actions/checkout@v3
