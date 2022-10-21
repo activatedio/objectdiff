@@ -23,6 +23,7 @@ jobs:
           echo "signing.keyId=8D1B668F" >> ~/.gradle/gradle.properties
           echo "signing.password=$GPG_SIGNING_KEY_PASSPHRASE" >> ~/.gradle/gradle.properties
           echo "signing.secretKeyRingFile=$HOME/.gnupg/secring.gpg" >> ~/.gradle/gradle.properties
+          ls ~/.gnupg
         env:
           GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
