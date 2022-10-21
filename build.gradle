@@ -26,9 +26,9 @@ subprojects {
   spotless {
     java {
       target 'src/**/*.java'
-        importOrder()
-        removeUnusedImports()
-        googleJavaFormat()   // has its own section below
+      importOrder()
+      removeUnusedImports()
+      googleJavaFormat()
     }
   }
 
