@@ -2,11 +2,10 @@ package io.activated.objectdiff;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
-import java.io.StringWriter;
-
 import io.activated.objectdiff.fixture.Dummy1;
 import io.activated.objectdiff.fixture.DummyState;
+import java.io.IOException;
+import java.io.StringWriter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
