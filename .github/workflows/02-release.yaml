@@ -13,8 +13,8 @@ jobs:
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v1
         env:
-          GPG_SIGNING_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Setup Login Credentials
         run: |
           echo "sonatypeUsername=$SONATYPE_USERNAME" >> ~/.gradle/gradle.properties
