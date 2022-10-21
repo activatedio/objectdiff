@@ -1,3 +1,9 @@
+buildscript {
+    repositories { 
+        mavenCentral()
+    }
+}
+
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -7,20 +13,30 @@ plugins {
     id('io.github.gradle-nexus.publish-plugin') version '1.1.0'
 }
 
-group = 'io.activated.objectdiff'
+subprojects {
 
+  apply plugin: 'java-library'
 
-repositories { 
-    mavenCentral()
-}
+  apply plugin: 'maven-publish'
 
-nexusPublishing {
   repositories {
-    sonatype()
+      mavenCentral()
   }
-}
 
-publishing {
+  spotless {
+    java {
+      target 'src/**/*.java'
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat()   // has its own section below
+    }
+  }
+
+  nexusPublishing {
+    repositories {
+      sonatype()
+    }
+  }
 
   publishing {
     publications {
@@ -28,7 +44,8 @@ publishing {
         from(components.java)
           pom {
             groupId = 'io.activated.objectdiff'
-            name = project.name
+            artifactId = 'objectdiff'
+            name = 'Object Diff'
             description = 'Object Diff'
             url = 'https://activated.io/projects/objectdiff'
             licenses {
@@ -55,39 +72,21 @@ publishing {
     }
   }
 
-}
-
-release {
-  afterReleaseBuild.dependsOn publish
-}
-
-signing {
-  sign publishing.publications.mavenJava
-}
-
-subprojects {
-
-  apply plugin: 'java-library'
-
-  apply plugin: 'maven-publish'
-
-  repositories {
-      mavenCentral()
-  }
-
-  spotless {
-    java {
-      target 'src/**/*.java'
-        importOrder()
-        removeUnusedImports()
-        googleJavaFormat()   // has its own section below
-    }
-  }
 
   java {
       sourceCompatibility = JavaVersion.toVersion("11")
       targetCompatibility = JavaVersion.toVersion("11")
   }
+
+
+  release {
+    afterReleaseBuild.dependsOn publish
+  }
+
+  signing {
+    sign publishing.publications.mavenJava
+  }
+
 
 
 }
