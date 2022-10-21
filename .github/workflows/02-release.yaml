@@ -17,6 +17,7 @@ jobs:
           PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
       - name: Setup Login Credentials
         run: |
+          mkdir ~/.gradle
           echo "sonatypeUsername=$SONATYPE_USERNAME" >> ~/.gradle/gradle.properties
           echo "sonatypePassword=$SONATYPE_PASSWORD" >> ~/.gradle/gradle.properties
         env:
