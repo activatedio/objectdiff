@@ -21,6 +21,7 @@ jobs:
           echo "sonatypeUsername=$SONATYPE_USERNAME" >> ~/.gradle/gradle.properties
           echo "sonatypePassword=$SONATYPE_PASSWORD" >> ~/.gradle/gradle.properties
           echo "signing.keyId=8D1B668F" >> ~/.gradle/gradle.properties
+          echo "signing.password=" >> ~/.gradle/gradle.properties
           echo "signing.secretKeyRingFile=$HOME/.gnupg/secring.gpg" >> ~/.gradle/gradle.properties
           ls -l ~/.gnupg
         env:
