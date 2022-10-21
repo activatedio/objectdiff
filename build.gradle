@@ -42,32 +42,32 @@ subprojects {
     publications {
       mavenJava(MavenPublication) {
         from(components.java)
-          pom {
-            groupId = 'io.activated.objectdiff'
-            artifactId = 'objectdiff'
-            name = 'Object Diff'
-            description = 'Object Diff'
-            url = 'https://activated.io/projects/objectdiff'
-            licenses {
-              license {
-                name = 'The Apache License, Version 2.0'
-                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-              }
-            }
-
-            developers {
-              developer {
-                id = 'btomasini'
-                name = 'Ben Tomasini'
-                email = 'btomasini@activated.io'
-              }
-            }
-            scm {
-              connection = 'scm:git:git://github.com/activatedio/objectdiff.git'
-              developerConnection = 'scm:git:git://github.com/activatedio/objectdiff.git'
-              url = 'https://github.com/activatedio/objectdiff'
+        pom {
+          groupId = 'io.activated.objectdiff'
+          artifactId = 'objectdiff'
+          name = 'Object Diff'
+          description = 'Object Diff'
+          url = 'https://activated.io/projects/objectdiff'
+          licenses {
+            license {
+              name = 'The Apache License, Version 2.0'
+              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             }
           }
+
+          developers {
+            developer {
+              id = 'btomasini'
+              name = 'Ben Tomasini'
+              email = 'btomasini@activated.io'
+            }
+          }
+          scm {
+            connection = 'scm:git:git://github.com/activatedio/objectdiff.git'
+            developerConnection = 'scm:git:git://github.com/activatedio/objectdiff.git'
+            url = 'https://github.com/activatedio/objectdiff'
+          }
+        }
       }
     }
   }
@@ -76,6 +76,8 @@ subprojects {
   java {
       sourceCompatibility = JavaVersion.toVersion("11")
       targetCompatibility = JavaVersion.toVersion("11")
+      withSourcesJar()
+      withJavadocJar()
   }
 
 
