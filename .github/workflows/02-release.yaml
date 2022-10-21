@@ -16,6 +16,8 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Environment Setup
         run: |
+          git config --global user.email "release@activated.io"
+          git config --global user.name "Activated Release"
           gpg --export-secret-keys -o ~/.gnupg/secring.gpg
           mkdir ~/.gradle
           echo "sonatypeUsername=$SONATYPE_USERNAME" >> ~/.gradle/gradle.properties
